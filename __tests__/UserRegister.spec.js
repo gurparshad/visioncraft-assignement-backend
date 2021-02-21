@@ -17,7 +17,7 @@ const validUser = {
   firstName: "testFirstName",
   lastName: "testLastName",
   email: "testEmail@email.com",
-  password: "Balbasor123@",
+  password: "TestUser123@",
 };
 
 // postUser method with validUser as default value
@@ -61,7 +61,7 @@ describe("User Registration", () => {
     await postUser();
     const userList = await User.findAll();
     const savedUser = userList[0];
-    expect(savedUser.password).not.toBe("testpassword");
+    expect(savedUser.password).not.toBe("TestUser123@");
   });
 
   it("returns 400 error when firstName is null", async () => {
@@ -69,7 +69,7 @@ describe("User Registration", () => {
       firstName: null,
       lastName: "testLastName",
       email: "testEmail@email.com",
-      password: "testpassword",
+      password: "TestUser123@",
     });
     expect(response.status).toBe(400);
   });
@@ -79,7 +79,7 @@ describe("User Registration", () => {
       firstName: null,
       lastName: "testLastName",
       email: "testEmail@email.com",
-      password: "testpassword",
+      password: "TestUser123@",
     });
     const body = response.body;
     expect(body.validationErrors).not.toBeUndefined();
@@ -90,7 +90,7 @@ describe("User Registration", () => {
       firstName: null,
       lastName: "testLastName",
       email: "testEmail@email.com",
-      password: "testpassword",
+      password: "TestUser123@",
     });
     const body = response.body;
     expect(body.validationErrors.firstName).toBe("firstName cannot be null");
@@ -101,7 +101,7 @@ describe("User Registration", () => {
       firstName: "testFirstName",
       lastName: null,
       email: "testEmail@email.com",
-      password: "testpassword",
+      password: "TestUser123@",
     });
     const body = response.body;
     expect(body.validationErrors.lastName).toBe("lastName cannot be null");
@@ -112,7 +112,7 @@ describe("User Registration", () => {
       firstName: "testFirstName",
       lastName: "testLastName",
       email: null,
-      password: "testpassword",
+      password: "TestUser123@",
     });
     const body = response.body;
     expect(body.validationErrors.email).toBe("email cannot be null");
@@ -172,7 +172,7 @@ describe("User Registration", () => {
         firstName: "testFirstName",
         lastName: "testLastName",
         email: "testEmail@email.com",
-        password: "TestPassword123@",
+        password: "TestUser123@",
       };
       user[field] = value;
       const response = await postUser(user);
@@ -193,7 +193,7 @@ describe("User Registration", () => {
       firstName: "testFirstName",
       lastName: null,
       email: "testEmail@email.com",
-      password: "TestPassword123@",
+      password: "TestUser123@",
     });
     const body = response.body;
     expect(Object.keys(body.validationErrors)).toEqual(["lastName", "email"]);

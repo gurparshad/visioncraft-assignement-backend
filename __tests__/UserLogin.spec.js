@@ -25,12 +25,12 @@ const validUser = {
   firstName: "testFirstName",
   lastName: "testLastName",
   email: "testEmail@email.com",
-  password: "Balbasor123@",
+  password: "TestUser123@",
 };
 
 const validLoginCredentials = {
   email: "testEmail@email.com",
-  password: "Balbasor123@",
+  password: "TestUser123@",
 };
 
 describe("User Login", () => {
@@ -44,7 +44,7 @@ describe("User Login", () => {
     await postUser();
     const response = await userLogin({
       email: "notRegistered@email.com",
-      password: "Test123@",
+      password: "TestUser123@",
     });
     expect(response.status).toBe(400);
   });
@@ -53,7 +53,7 @@ describe("User Login", () => {
     await postUser();
     const response = await userLogin({
       email: null,
-      password: "Test123@",
+      password: "TestUser123@",
     });
     const body = response.body;
     expect(body.validationErrors.email).toBe("email cannot be null");
