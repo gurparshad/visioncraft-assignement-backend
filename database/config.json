@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "root",
+    "password": "",
+    "database": "visioncraft-express",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}

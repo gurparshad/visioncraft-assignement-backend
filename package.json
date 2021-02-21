@@ -17,10 +17,12 @@
     "express-validator": "^6.9.2",
     "http-status-code": "^2.1.0",
     "mysql2": "^2.2.5",
-    "sequelize": "^6.5.0"
+    "sequelize": "^6.5.0",
+    "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",

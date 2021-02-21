@@ -1,9 +1,0 @@
-{
-    "database": {
-        "database": "visioncraft-express",
-        "username": "root",
-        "password": "",
-        "dialect": "mysql",
-        "logging": false
-    }
-}
