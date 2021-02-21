@@ -3,6 +3,7 @@ const router = express.Router();
 const UserService = require("./UserService");
 const { check, validationResult } = require("express-validator");
 
+// user registration route
 router.post(
   "/api/1.0/users/register",
 
@@ -59,6 +60,7 @@ router.post(
   },
 );
 
+// user login route
 router.post(
   "/api/1.0/users/login",
 
@@ -90,9 +92,9 @@ router.post(
     }
     const user = await UserService.findByEmail(req.body.email);
     if (!user) {
-      return res.send({ message: "invalid user" });
+      return res.status(400).send({ message: "invalid user" });
     }
-    return res.send({ message: "login Success" });
+    return res.status(200).send({ message: "login Success" });
   },
 );
 

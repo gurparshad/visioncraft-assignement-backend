@@ -107,7 +107,7 @@ describe("User Registration", () => {
     expect(body.validationErrors.lastName).toBe("lastName cannot be null");
   });
 
-  it("returns message - email cannot be null, when lastName is null", async () => {
+  it("returns message - email cannot be null, when email is null", async () => {
     const response = await postUser({
       firstName: "testFirstName",
       lastName: "testLastName",
@@ -184,7 +184,6 @@ describe("User Registration", () => {
   it("returns email in use error, when same email is already in use", async () => {
     await User.create({ ...validUser });
     const response = await postUser();
-    console.log("here here ---->>", response.body.validationErrors);
     expect(response.body.validationErrors.email).toBe("email already in use");
   });
 
