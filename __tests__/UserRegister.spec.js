@@ -13,16 +13,16 @@ beforeEach(() => {
   return User.destroy({ truncate: true });
 });
 
-// postUser method with validUser as default value
-const postUser = (user = validUser) => {
-  return request(app).post("/api/1.0/users").send(user);
-};
-
 const validUser = {
   firstName: "testFirstName",
   lastName: "testLastName",
   email: "testEmail@email.com",
-  password: "testpassword",
+  password: "Balbasor123@",
+};
+
+// postUser method with validUser as default value
+const postUser = (user = validUser) => {
+  return request(app).post("/api/1.0/users/register").send(user);
 };
 
 describe("User Registration", () => {
@@ -94,5 +94,109 @@ describe("User Registration", () => {
     });
     const body = response.body;
     expect(body.validationErrors.firstName).toBe("firstName cannot be null");
+  });
+
+  it("returns message - lastName cannot be null, when lastName is null", async () => {
+    const response = await postUser({
+      firstName: "testFirstName",
+      lastName: null,
+      email: "testEmail@email.com",
+      password: "testpassword",
+    });
+    const body = response.body;
+    expect(body.validationErrors.lastName).toBe("lastName cannot be null");
+  });
+
+  it("returns message - email cannot be null, when lastName is null", async () => {
+    const response = await postUser({
+      firstName: "testFirstName",
+      lastName: "testLastName",
+      email: null,
+      password: "testpassword",
+    });
+    const body = response.body;
+    expect(body.validationErrors.email).toBe("email cannot be null");
+  });
+
+  it("returns message - password cannot be null, when password is null", async () => {
+    const response = await postUser({
+      firstName: "testFirstName",
+      lastName: "testLastName",
+      email: "testEmail@email.com",
+      password: null,
+    });
+    const body = response.body;
+    expect(body.validationErrors.password).toBe("password cannot be null");
+  });
+
+  it("returns errors for both email and password, when email and password are null", async () => {
+    const response = await postUser({
+      firstName: "testFirstName",
+      lastName: "testLastName",
+      email: null,
+      password: null,
+    });
+    const body = response.body;
+    expect(Object.keys(body.validationErrors)).toEqual(["email", "password"]);
+  });
+
+  /** Dynamic Testing using jest, this approach can replace some of the testcases above
+    because they have some repeting code
+   */
+
+  it.each`
+    field          | value              | expectedMessage
+    ${"firstName"} | ${null}            | ${"firstName cannot be null"}
+    ${"firstName"} | ${"fi"}            | ${"Must have min 3 and max 40 characters"}
+    ${"firstName"} | ${"a".repeat(41)}  | ${"Must have min 3 and max 40 characters"}
+    ${"lastName"}  | ${null}            | ${"lastName cannot be null"}
+    ${"lastName"}  | ${"la"}            | ${"Must have min 3 and max 40 characters"}
+    ${"lastName"}  | ${"a".repeat(41)}  | ${"Must have min 3 and max 40 characters"}
+    ${"email"}     | ${null}            | ${"email cannot be null"}
+    ${"email"}     | ${"mail.com"}      | ${"email not valid"}
+    ${"email"}     | ${"user.mail.com"} | ${"email not valid"}
+    ${"email"}     | ${"user@mail"}     | ${"email not valid"}
+    ${"password"}  | ${null}            | ${"password cannot be null"}
+    ${"password"}  | ${null}            | ${"password cannot be null"}
+    ${"password"}  | ${"P4ssw"}         | ${"Password must have atleast 8 characters"}
+    ${"password"}  | ${"alllowercase"}  | ${"password_pattern"}
+    ${"password"}  | ${"ALLUPPERCASE"}  | ${"password_pattern"}
+    ${"password"}  | ${"1234567890"}    | ${"password_pattern"}
+    ${"password"}  | ${"lowerandUPPER"} | ${"password_pattern"}
+    ${"password"}  | ${"lower4nd5667"}  | ${"password_pattern"}
+    ${"password"}  | ${"UPPER44444"}    | ${"password_pattern"}
+  `(
+    "returns $expectedMessage when $field is $value",
+    async ({ field, expectedMessage, value }) => {
+      const user = {
+        firstName: "testFirstName",
+        lastName: "testLastName",
+        email: "testEmail@email.com",
+        password: "TestPassword123@",
+      };
+      user[field] = value;
+      const response = await postUser(user);
+      const body = response.body;
+      expect(body.validationErrors[field]).toBe(expectedMessage);
+    },
+  );
+
+  it("returns email in use error, when same email is already in use", async () => {
+    await User.create({ ...validUser });
+    const response = await postUser();
+    console.log("here here ---->>", response.body.validationErrors);
+    expect(response.body.validationErrors.email).toBe("email already in use");
+  });
+
+  it("returns errors from both lastName is null and email is in use", async () => {
+    await User.create({ ...validUser });
+    const response = await postUser({
+      firstName: "testFirstName",
+      lastName: null,
+      email: "testEmail@email.com",
+      password: "TestPassword123@",
+    });
+    const body = response.body;
+    expect(Object.keys(body.validationErrors)).toEqual(["lastName", "email"]);
   });
 });
