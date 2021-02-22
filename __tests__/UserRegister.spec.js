@@ -159,12 +159,12 @@ describe("User Registration", () => {
     ${"password"}  | ${null}            | ${"password cannot be null"}
     ${"password"}  | ${null}            | ${"password cannot be null"}
     ${"password"}  | ${"P4ssw"}         | ${"Password must have atleast 8 characters"}
-    ${"password"}  | ${"alllowercase"}  | ${"Password must contain an uppercase,a lowercase, a number and a special character"}
-    ${"password"}  | ${"ALLUPPERCASE"}  | ${"Password must contain an uppercase,a lowercase, a number and a special character"}
-    ${"password"}  | ${"1234567890"}    | ${"Password must contain an uppercase,a lowercase, a number and a special character"}
-    ${"password"}  | ${"lowerandUPPER"} | ${"Password must contain an uppercase,a lowercase, a number and a special character"}
-    ${"password"}  | ${"lower4nd5667"}  | ${"Password must contain an uppercase,a lowercase, a number and a special character"}
-    ${"password"}  | ${"UPPER44444"}    | ${"Password must contain an uppercase,a lowercase, a number and a special character"}
+    ${"password"}  | ${"alllowercase"}  | ${"Password must contain an uppercase,a lowercase, and a number"}
+    ${"password"}  | ${"ALLUPPERCASE"}  | ${"Password must contain an uppercase,a lowercase, and a number"}
+    ${"password"}  | ${"1234567890"}    | ${"Password must contain an uppercase,a lowercase, and a number"}
+    ${"password"}  | ${"lowerandUPPER"} | ${"Password must contain an uppercase,a lowercase, and a number"}
+    ${"password"}  | ${"lower4nd5667"}  | ${"Password must contain an uppercase,a lowercase, and a number"}
+    ${"password"}  | ${"UPPER44444"}    | ${"Password must contain an uppercase,a lowercase, and a number"}
   `(
     "returns $expectedMessage when $field is $value",
     async ({ field, expectedMessage, value }) => {

@@ -45,7 +45,7 @@ router.post(
     .bail()
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/)
     .withMessage(
-      "Password must contain an uppercase,a lowercase, a number and a special character",
+      "Password must contain an uppercase,a lowercase, and a number",
     ),
 
   async (req, res) => {
@@ -91,7 +91,7 @@ router.post(
     .bail()
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/)
     .withMessage(
-      "Password must contain an uppercase,a lowercase, a number and a special character",
+      "Password must contain an uppercase,a lowercase, and a number",
     ),
 
   async (req, res) => {
