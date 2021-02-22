@@ -1,7 +1,7 @@
 # visioncraft-assignement-backend
 
 ## Steps to set up the application:
-- Clone the repository by using the command git clone 
+- Clone the repository by using the command "git clone https://github.com/gurparshad/visioncraft-assignement-backend.git"
 - Run the command(without quotes) "npm install"
 
 
