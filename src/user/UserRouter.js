@@ -56,7 +56,16 @@ router.post(
       return res.status(400).send({ validationErrors: validationErrors });
     }
     await UserService.save(req.body);
-    return res.send({ message: "user created" });
+    const user = await UserService.findByEmail(req.body.email);
+    return res.send({
+      message: "user created",
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      },
+    });
   },
 );
 
@@ -94,7 +103,15 @@ router.post(
     if (!user) {
       return res.status(400).send({ message: "invalid user" });
     }
-    return res.status(200).send({ message: "login Success" });
+    return res.status(200).send({
+      message: "login Success",
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      },
+    });
   },
 );
 
