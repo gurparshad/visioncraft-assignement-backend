@@ -44,7 +44,9 @@ router.post(
     .withMessage("Password must have atleast 8 characters")
     .bail()
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/)
-    .withMessage("password_pattern"),
+    .withMessage(
+      "Password must contain an uppercase,a lowercase, a number and a special character",
+    ),
 
   async (req, res) => {
     const errors = validationResult(req);
@@ -88,7 +90,9 @@ router.post(
     .withMessage("Password must have atleast 8 characters")
     .bail()
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/)
-    .withMessage("password_pattern"),
+    .withMessage(
+      "Password must contain an uppercase,a lowercase, a number and a special character",
+    ),
 
   async (req, res) => {
     const errors = validationResult(req);
