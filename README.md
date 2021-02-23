@@ -1,11 +1,11 @@
 # visioncraft-assignement-backend
 
-## Steps to set up the application:
+## Steps to set up the application
 - Clone the repository by using the command "git clone https://github.com/gurparshad/visioncraft-assignement-backend.git"
 - Run the command(without quotes) "npm install"
 
 
-## Setting up database:
+## Setting up database
 
 - Create a database schema through the command line or MySQL workbench.
  Please setup one database for the development and second for testing
@@ -19,6 +19,10 @@
     
 - Run the command "npx sequelize-cli db:migrate"
     The database will be created with the user table.
+
+## Start the application
+
+run command "npm start"
 
 ## How to run test cases
 
