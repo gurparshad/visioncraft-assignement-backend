@@ -8,6 +8,7 @@
 ## Setting up database:
 
 - Create a database schema through the command line or MySQL workbench.
+ Please setup one database for the development and second for testing
 
 - Change the environment varibles in the .env file located in the root directory.
     - DATABASE_DEV = nameOfYourDevelopmentDatabase
@@ -26,3 +27,20 @@ To run test cases which are located in 2 files UserRegister.spec.js and UserLogi
 - run the following commands:
     - For userRegister - "npm test UserRegister.spec.js"
     - For UserLogin - "npm test UserLogin.spec.js"
+
+
+
+### Languages and libraries used
+
+- node js
+- express js
+- javascript
+- jest
+- supertest
+- sequelize
+- mysql2
+- bcrypt
+- sequelize-cli
+- express-validators
+- cross-env
+- config
