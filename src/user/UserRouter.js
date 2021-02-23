@@ -12,14 +12,14 @@ router.post(
     .notEmpty()
     .withMessage("firstName cannot be null")
     .bail()
-    .isLength({ min: 4, max: 40 })
+    .isLength({ min: 3, max: 40 })
     .withMessage("Must have min 3 and max 40 characters"),
 
   check("lastName")
     .notEmpty()
     .withMessage("lastName cannot be null")
     .bail()
-    .isLength({ min: 4, max: 40 })
+    .isLength({ min: 3, max: 40 })
     .withMessage("Must have min 3 and max 40 characters"),
 
   check("email")
