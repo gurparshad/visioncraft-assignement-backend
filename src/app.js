@@ -10,4 +10,9 @@ app.use(bodyParser.json());
 
 app.use(UserRouter);
 
+app.use("/", (req, res) => {
+  console.log("hello world");
+  return res.send({ message: "API working" });
+});
+
 module.exports = app;
