@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const UserService = require("./UserService");
 const { check, validationResult } = require("express-validator");
+const bcrypt = require("bcrypt");
 
 // user registration route
 router.post(
@@ -106,6 +107,10 @@ router.post(
     const user = await UserService.findByEmail(req.body.email);
     if (!user) {
       return res.status(400).send({ message: "invalid user" });
+    }
+    const isMatch = await bcrypt.compare(req.body.password, user.password);
+    if (!isMatch) {
+      return res.status(400).send({ message: "Incorrect Password" });
     }
     return res.status(200).send({
       message: "login Success",
