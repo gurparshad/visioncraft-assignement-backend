@@ -36,10 +36,11 @@ To run test cases which are located in 2 files UserRegister.spec.js and UserLogi
 https://www.getpostman.com/collections/a442da7f79438735b9c9
 
 
-## Languages and libraries used
+## tech stack Languages and libraries used
 
 - node js
 - express js
+- mysql
 - javascript
 - jest
 - supertest
